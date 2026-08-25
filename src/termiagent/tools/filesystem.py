@@ -1,5 +1,6 @@
 import os
 import re
+import difflib
 import pathspec
 from pathlib import Path
 from typing import List, Dict, Any, Optional
@@ -11,6 +12,7 @@ DEFAULT_IGNORED_DIRS = {
     "env", ".env", ".idea", ".vscode", "dist", "build", ".eggs", "*.egg-info",
     ".pytest_cache", ".coverage", "htmlcov", "target", "bin", "obj"
 }
+
 
 def view_file(file_path: str, start_line: Optional[int] = 1, end_line: Optional[int] = None) -> str:
     """Reads and returns the contents of a file with line numbers."""
@@ -53,7 +55,7 @@ def write_file(file_path: str, content: str, overwrite: bool = True) -> str:
 
 
 def edit_file(file_path: str, target_content: str, replacement_content: str) -> str:
-    """Replaces exact target text with replacement content in a file."""
+    """Replaces exact target text with replacement content in a file and generates a diff."""
     path = Path(file_path).resolve()
     if not path.exists():
         return f"Error: File '{file_path}' does not exist."
@@ -68,10 +70,20 @@ def edit_file(file_path: str, target_content: str, replacement_content: str) -> 
         count = full_text.count(target_content)
         new_text = full_text.replace(target_content, replacement_content, 1)
 
+        # Generate Unified Diff
+        diff_lines = list(difflib.unified_diff(
+            full_text.splitlines(keepends=True),
+            new_text.splitlines(keepends=True),
+            fromfile=f"a/{file_path}",
+            tofile=f"b/{file_path}",
+            n=3
+        ))
+        diff_text = "".join(diff_lines)
+
         with open(path, "w", encoding="utf-8") as f:
             f.write(new_text)
 
-        return f"Successfully replaced content in '{file_path}' (Matches found: {count})."
+        return f"Successfully replaced content in '{file_path}' (Matches found: {count}).\n\n--- Diff ---\n{diff_text}"
     except Exception as e:
         return f"Error editing file '{file_path}': {str(e)}"
 
@@ -165,7 +177,7 @@ def get_filesystem_tools() -> List[Tool]:
         Tool(
             spec=ToolSpec(
                 name="edit_file",
-                description="Replaces target content in a file with replacement content.",
+                description="Replaces target content in a file with replacement content and outputs diff.",
                 parameters=[
                     ToolParameter(name="file_path", type="string", description="Path to the file to edit."),
                     ToolParameter(name="target_content", type="string", description="Exact text block to replace."),
