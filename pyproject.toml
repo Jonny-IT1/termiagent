@@ -45,6 +45,6 @@ dev = [
 termiagent = "termiagent.cli:main"
 
 [project.urls]
-Homepage = "https://github.com/example/termiagent"
-Repository = "https://github.com/example/termiagent"
-Issues = "https://github.com/example/termiagent/issues"
+Homepage = "https://github.com/Jonas-IT/termiagent"
+Repository = "https://github.com/Jonas-IT/termiagent"
+Issues = "https://github.com/Jonas-IT/termiagent/issues"

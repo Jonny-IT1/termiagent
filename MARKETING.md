@@ -17,7 +17,7 @@ This document contains ready-to-post launch text templates to showcase **TermiAg
 > - ⚡ **Fast & Lightweight**: Built in pure Python, installs instantly with `uv`.
 > - 🐍 **Programmatic SDK**: Can be imported into other Python projects (`from termiagent import TermiAgent`).
 >
-> Check it out on GitHub: https://github.com/example/termiagent
+> Check it out on GitHub: https://github.com/Jonas-IT/termiagent
 > Feedback and contributions are very welcome!
 
 ---
@@ -45,7 +45,7 @@ This document contains ready-to-post launch text templates to showcase **TermiAg
 > - Modern Rich REPL with slash commands
 > - Full MIT License (100% free open source)
 >
-> GitHub Repo: https://github.com/example/termiagent
+> GitHub Repo: https://github.com/Jonas-IT/termiagent
 
 ---
 
@@ -55,7 +55,7 @@ This document contains ready-to-post launch text templates to showcase **TermiAg
 > 
 > Works with @GoogleAI Gemini, @OpenAI GPT-4o, @AnthropicAI Claude, DeepSeek, or 100% locally via @ollama!
 > 
-> 🔗 GitHub: https://github.com/example/termiagent
+> 🔗 GitHub: https://github.com/Jonas-IT/termiagent
 > 
 > 2/4 ⚡ Why TermiAgent?
 > - Pure Python 3 & instant `uv` install

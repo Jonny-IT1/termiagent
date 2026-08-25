@@ -59,13 +59,13 @@
 ### Linux / macOS
 
 ```bash
-curl -LsSf https://raw.githubusercontent.com/example/termiagent/main/install.sh | sh
+curl -LsSf https://raw.githubusercontent.com/Jonas-IT/termiagent/main/install.sh | sh
 ```
 
 ### Windows (PowerShell)
 
 ```powershell
-powershell -ExecutionPolicy ByPass -c "irm https://raw.githubusercontent.com/example/termiagent/main/install.ps1 | iex"
+powershell -ExecutionPolicy ByPass -c "irm https://raw.githubusercontent.com/Jonas-IT/termiagent/main/install.ps1 | iex"
 ```
 
 ### Standard PyPI / Local Installation
