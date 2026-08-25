@@ -8,16 +8,30 @@ from typing import List, Dict, Any, Optional, Union
 from .base import BaseLLMProvider
 
 PROVIDER_ENDPOINT_MAP = {
+    # Cloud AI Providers
     "openai": "https://api.openai.com/v1/chat/completions",
     "anthropic": "https://api.anthropic.com/v1/messages",
     "gemini": "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions",
     "deepseek": "https://api.deepseek.com/chat/completions",
     "mistral": "https://api.mistral.ai/v1/chat/completions",
     "minimax": "https://api.minimaxi.chat/v1/chat/completions",
+    "cohere": "https://api.cohere.com/v2/chat",
+    "perplexity": "https://api.perplexity.ai/chat/completions",
+    "together": "https://api.together.xyz/v1/chat/completions",
+    "fireworks": "https://api.fireworks.ai/inference/v1/chat/completions",
     "openrouter": "https://openrouter.ai/api/v1/chat/completions",
     "groq": "https://api.groq.com/openai/v1/chat/completions",
+    "huggingface": "https://api-inference.huggingface.co/v1/chat/completions",
+    "anyscale": "https://api.endpoints.anyscale.com/v1/chat/completions",
+    "replicate": "https://api.replicate.com/v1/predictions",
+
+    # Local & Self-Hosted Providers
     "ollama": "http://localhost:11434/v1/chat/completions",
-    "lmstudio": "http://localhost:1234/v1/chat/completions"
+    "lmstudio": "http://localhost:1234/v1/chat/completions",
+    "vllm": "http://localhost:8000/v1/chat/completions",
+    "jan": "http://localhost:1337/v1/chat/completions",
+    "kobold": "http://localhost:5001/v1/chat/completions",
+    "textgen": "http://localhost:5000/v1/chat/completions"
 }
 
 PROVIDER_ENV_KEYS = {
@@ -26,75 +40,100 @@ PROVIDER_ENV_KEYS = {
     "deepseek": "DEEPSEEK_API_KEY",
     "mistral": "MISTRAL_API_KEY",
     "minimax": "MINIMAX_API_KEY",
+    "cohere": "COHERE_API_KEY",
+    "perplexity": "PERPLEXITY_API_KEY",
+    "together": "TOGETHER_API_KEY",
+    "fireworks": "FIREWORKS_API_KEY",
     "openrouter": "OPENROUTER_API_KEY",
     "groq": "GROQ_API_KEY",
-    "anthropic": "ANTHROPIC_API_KEY"
+    "anthropic": "ANTHROPIC_API_KEY",
+    "huggingface": "HF_TOKEN",
+    "anyscale": "ANYSCALE_API_KEY",
+    "replicate": "REPLICATE_API_TOKEN"
 }
 
-# Complete Catalog of Modern, Vision, and Legacy Models
+# Extensive Model Catalog Mapping
 MODEL_CATALOG = {
-    # OpenAI (Modern, Vision & Legacy)
-    "openai/latest": "gpt-4o",
-    "openai/gpt-4o": "gpt-4o",
-    "openai/gpt-4o-mini": "gpt-4o-mini",
-    "openai/o1": "o1",
-    "openai/o3-mini": "o3-mini",
-    "openai/gpt-4-turbo": "gpt-4-turbo",
-    "openai/gpt-4": "gpt-4",
-    "openai/gpt-3.5-turbo": "gpt-3.5-turbo",
+    # OpenAI
+    "openai/latest": "openai/gpt-4o",
+    "openai/gpt-4o": "openai/gpt-4o",
+    "openai/gpt-4o-mini": "openai/gpt-4o-mini",
+    "openai/o1": "openai/o1",
+    "openai/o3-mini": "openai/o3-mini",
+    "openai/gpt-4-turbo": "openai/gpt-4-turbo",
+    "openai/gpt-4": "openai/gpt-4",
+    "openai/gpt-3.5-turbo": "openai/gpt-3.5-turbo",
 
-    # Google Gemini (Modern, Vision & Legacy)
-    "gemini/latest": "gemini-2.0-flash",
-    "gemini/gemini-2.0-flash": "gemini-2.0-flash",
-    "gemini/gemini-2.0-pro-exp": "gemini-2.0-pro-exp",
-    "gemini/gemini-1.5-pro": "gemini-1.5-pro",
-    "gemini/gemini-1.5-flash": "gemini-1.5-flash",
-    "gemini/gemini-1.0-pro": "gemini-1.0-pro",
+    # Google Gemini
+    "gemini/latest": "gemini/gemini-2.0-flash",
+    "gemini/gemini-2.0-flash": "gemini/gemini-2.0-flash",
+    "gemini/gemini-2.0-pro-exp": "gemini/gemini-2.0-pro-exp",
+    "gemini/gemini-1.5-pro": "gemini/gemini-1.5-pro",
+    "gemini/gemini-1.5-flash": "gemini/gemini-1.5-flash",
+    "gemini/gemini-1.0-pro": "gemini/gemini-1.0-pro",
 
-    # Anthropic Claude (Modern & Legacy)
-    "anthropic/latest": "claude-3-5-sonnet-20241022",
-    "anthropic/claude-3-5-sonnet": "claude-3-5-sonnet-20241022",
-    "anthropic/claude-3-5-haiku": "claude-3-5-haiku-20241022",
-    "anthropic/claude-3-opus": "claude-3-opus-20240229",
-    "anthropic/claude-3-sonnet": "claude-3-sonnet-20240229",
-    "anthropic/claude-3-haiku": "claude-3-haiku-20240307",
-    "anthropic/claude-2.1": "claude-2.1",
+    # Anthropic Claude
+    "anthropic/latest": "anthropic/claude-3-5-sonnet-20241022",
+    "anthropic/claude-3-5-sonnet": "anthropic/claude-3-5-sonnet-20241022",
+    "anthropic/claude-3-5-haiku": "anthropic/claude-3-5-haiku-20241022",
+    "anthropic/claude-3-opus": "anthropic/claude-3-opus-20240229",
+    "anthropic/claude-3-sonnet": "anthropic/claude-3-sonnet-20240229",
+    "anthropic/claude-3-haiku": "anthropic/claude-3-haiku-20240307",
+    "anthropic/claude-2.1": "anthropic/claude-2.1",
 
     # DeepSeek
-    "deepseek/latest": "deepseek-chat",
-    "deepseek/deepseek-chat": "deepseek-chat",
-    "deepseek/deepseek-reasoner": "deepseek-reasoner",
-    "deepseek/deepseek-coder": "deepseek-coder",
-    "deepseek/deepseek-vl": "deepseek-vl",
+    "deepseek/latest": "deepseek/deepseek-chat",
+    "deepseek/deepseek-chat": "deepseek/deepseek-chat",
+    "deepseek/deepseek-reasoner": "deepseek/deepseek-reasoner",
+    "deepseek/deepseek-coder": "deepseek/deepseek-coder",
+    "deepseek/deepseek-vl": "deepseek/deepseek-vl",
 
-    # Mistral AI (Modern, Vision & Legacy)
-    "mistral/latest": "codestral-latest",
-    "mistral/codestral": "codestral-latest",
-    "mistral/mistral-large": "mistral-large-latest",
-    "mistral/pixtral-large": "pixtral-large-latest", # Vision Model
-    "mistral/mistral-small": "mistral-small-latest",
-    "mistral/mistral-medium": "mistral-medium",      # Legacy
+    # Mistral AI
+    "mistral/latest": "mistral/codestral-latest",
+    "mistral/codestral": "mistral/codestral-latest",
+    "mistral/mistral-large": "mistral/mistral-large-latest",
+    "mistral/pixtral-large": "mistral/pixtral-large-latest",
+    "mistral/mistral-small": "mistral/mistral-small-latest",
+    "mistral/mistral-medium": "mistral/mistral-medium",
 
-    # MiniMax (Modern & Legacy)
-    "minimax/latest": "minimax-text-01",
-    "minimax/minimax-text-01": "minimax-text-01",
-    "minimax/abab6.5t": "abab6.5t-chat",
-    "minimax/abab6.5g": "abab6.5g-chat",
-    "minimax/abab6.5": "abab6.5-chat",
-    "minimax/abab5.5": "abab5.5-chat",               # Legacy
+    # Cohere
+    "cohere/latest": "cohere/command-r-plus",
+    "cohere/command-r-plus": "cohere/command-r-plus",
+    "cohere/command-r": "cohere/command-r",
 
-    # Groq (Super-Fast)
-    "groq/latest": "llama-3.3-70b-versatile",
-    "groq/llama-3.3-70b": "llama-3.3-70b-versatile",
-    "groq/deepseek-r1-70b": "deepseek-r1-distill-llama-70b",
-    "groq/mixtral-8x7b": "mixtral-8x7b-32768",
+    # Perplexity AI
+    "perplexity/latest": "perplexity/sonar-pro",
+    "perplexity/sonar-pro": "perplexity/sonar-pro",
+    "perplexity/sonar": "perplexity/sonar",
+    "perplexity/sonar-reasoning": "perplexity/sonar-reasoning",
 
-    # Local Ollama
-    "ollama/latest": "qwen2.5-coder:latest",
-    "ollama/qwen2.5-coder": "qwen2.5-coder:latest",
-    "ollama/llama3.3": "llama3.3:latest",
-    "ollama/llava": "llava:latest",                    # Vision Model
-    "ollama/qwen2-vl": "qwen2-vl:latest"              # Vision Model
+    # MiniMax
+    "minimax/latest": "minimax/minimax-text-01",
+    "minimax/minimax-text-01": "minimax/minimax-text-01",
+    "minimax/abab6.5t": "minimax/abab6.5t-chat",
+    "minimax/abab6.5g": "minimax/abab6.5g-chat",
+    "minimax/abab6.5": "minimax/abab6.5-chat",
+    "minimax/abab5.5": "minimax/abab5.5-chat",
+
+    # Together AI & Fireworks AI
+    "together/latest": "together/meta-llama/Llama-3.3-70B-Instruct-Turbo",
+    "together/llama3.3": "together/meta-llama/Llama-3.3-70B-Instruct-Turbo",
+    "together/deepseek-r1": "together/deepseek-ai/DeepSeek-R1",
+    "fireworks/latest": "fireworks/accounts/fireworks/models/deepseek-r1",
+
+    # Groq
+    "groq/latest": "groq/llama-3.3-70b-versatile",
+    "groq/llama-3.3-70b": "groq/llama-3.3-70b-versatile",
+    "groq/deepseek-r1-70b": "groq/deepseek-r1-distill-llama-70b",
+    "groq/mixtral-8x7b": "groq/mixtral-8x7b-32768",
+
+    # Local Ollama & vLLM
+    "ollama/latest": "ollama/qwen2.5-coder:latest",
+    "ollama/qwen2.5-coder": "ollama/qwen2.5-coder:latest",
+    "ollama/llama3.3": "ollama/llama3.3:latest",
+    "ollama/llava": "ollama/llava:latest",
+    "ollama/qwen2-vl": "ollama/qwen2-vl:latest",
+    "vllm/latest": "vllm/default"
 }
 
 
@@ -106,12 +145,7 @@ class UniversalLLMProvider(BaseLLMProvider):
         base_url: Optional[str] = None
     ):
         raw_key = model_name.lower()
-        clean = MODEL_CATALOG.get(raw_key, model_name)
-        if "/" not in clean and "/" in model_name:
-            provider_part = model_name.split("/", 1)[0].lower()
-            clean = f"{provider_part}/{clean}"
-
-        self.model_name = clean
+        self.model_name = MODEL_CATALOG.get(raw_key, model_name)
         self.provider_prefix, self.clean_model_name = self._parse_model_name(self.model_name)
         self.api_key = api_key or self._resolve_api_key(self.provider_prefix)
         self.base_url = base_url or PROVIDER_ENDPOINT_MAP.get(self.provider_prefix, PROVIDER_ENDPOINT_MAP["openai"])
@@ -146,7 +180,7 @@ class UniversalLLMProvider(BaseLLMProvider):
         messages: List[Dict[str, Any]],
         tools: Optional[List[Dict[str, Any]]] = None
     ) -> Dict[str, Any]:
-        """Sends chat request using OpenAI-compatible HTTP REST protocol with Vision payload support."""
+        """Sends chat request using OpenAI-compatible HTTP REST protocol."""
         headers = {
             "Content-Type": "application/json"
         }

@@ -9,7 +9,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg)](#)
 
-**TermiAgent** is an autonomous open-source AI coding agent that runs directly in your terminal. Inspect codebases, edit files, search code, process images, generate assets, and run shell commands — powered by **ANY** AI provider or local LLM (*Gemini 2.0/1.5, Claude 3.5/3, GPT-4o/3.5, DeepSeek V3/R1, Mistral Le Chat, MiniMax, Ollama, OpenRouter, Groq*).
+**TermiAgent** is an autonomous open-source AI coding agent that runs directly in your terminal. Inspect codebases, edit files, search code, process images, generate assets, and run shell commands — powered by **ANY** AI provider or local LLM (*Gemini, Claude, GPT, DeepSeek, Mistral, MiniMax, Cohere, Perplexity, Together AI, Fireworks, Groq, HuggingFace, Ollama, vLLM, LM Studio, Jan*).
 
 [Features](#-key-features) • [1-Command Install](#-fast-1-command-installation-with-uv) • [Supported Models](#-supported-ai-model-providers) • [Python SDK](#-python-sdk-integration) • [License](#-license)
 
@@ -19,7 +19,7 @@
 
 ## ⚡ Key Features
 
-- 🔌 **Universal Model Compatibility**: Connect seamlessly to Google Gemini, Anthropic Claude, OpenAI, DeepSeek, Mistral AI (Le Chat / Codestral), MiniMax, OpenRouter, Groq, or 100% offline local LLMs via Ollama & LM Studio.
+- 🔌 **Universal Model & Provider Compatibility**: Connect seamlessly to Google Gemini, Anthropic Claude, OpenAI, DeepSeek, Mistral AI (Le Chat / Codestral), MiniMax, Cohere, Perplexity AI, Together AI, Fireworks AI, Groq, HuggingFace, or 100% offline local LLMs via Ollama, LM Studio, vLLM, Jan, and KoboldAI.
 - 👁️ **Multimodal Vision Understanding**: Input screenshots, diagrams, or UI mockups for vision models (Claude 3.5 Vision, Gemini 2.0 Vision, GPT-4o Vision, Pixtral, LLaVA, Qwen2-VL).
 - 🎨 **Image & Diagram Generation**: Native `generate_image` tool to produce diagrams, UI mockups, and visual assets directly from text prompts.
 - 📜 **Full Modern & Legacy Model Catalog**: Support for both the newest flagship models (`gemini/latest`, `openai/latest`, `mistral/latest`) AND legacy versions (`gpt-3.5-turbo`, `claude-2.1`, `gemini-1.0-pro`, `abab5.5`).
@@ -35,9 +35,7 @@
 
 ---
 
-## 🤖 Supported AI Model Catalog (Modern & Legacy)
-
-TermiAgent supports any OpenAI-compatible API endpoint, vision provider, or legacy model. Specify the model using `--model provider/model-name`:
+## 🤖 Supported AI Model Catalog (Modern, Vision, Legacy & Local)
 
 | Provider | Modern Models | Legacy Models | Vision Models |
 | :--- | :--- | :--- | :--- |
@@ -46,9 +44,13 @@ TermiAgent supports any OpenAI-compatible API endpoint, vision provider, or lega
 | **Anthropic** | `anthropic/latest`, `anthropic/claude-3-5-sonnet` | `anthropic/claude-3-opus`, `anthropic/claude-2.1` | `anthropic/claude-3-5-sonnet` |
 | **Mistral AI** | `mistral/latest`, `mistral/codestral-latest`, `mistral/mistral-large` | `mistral/mistral-medium`, `mistral/mistral-small` | `mistral/pixtral-large` |
 | **DeepSeek** | `deepseek/latest`, `deepseek/deepseek-chat` (V3), `deepseek/deepseek-reasoner` (R1) | `deepseek/deepseek-coder` | `deepseek/deepseek-vl` |
+| **Cohere** | `cohere/latest`, `cohere/command-r-plus`, `cohere/command-r` | `cohere/command-light` | `cohere/command-r-plus` |
+| **Perplexity AI** | `perplexity/latest`, `perplexity/sonar-pro`, `perplexity/sonar-reasoning` | `perplexity/sonar` | `perplexity/sonar-pro` |
+| **Together / Fireworks** | `together/latest`, `together/llama3.3`, `fireworks/latest` | `together/mixtral` | `together/llama-vision` |
 | **MiniMax** | `minimax/latest`, `minimax/minimax-text-01`, `minimax/abab6.5t` | `minimax/abab6.5`, `minimax/abab5.5` | `minimax/minimax-text-01` |
 | **Groq (Fast)** | `groq/latest`, `groq/llama-3.3-70b`, `groq/deepseek-r1-70b` | `groq/mixtral-8x7b` | `groq/llama-3.3-70b` |
-| **Ollama (Local)** | `ollama/latest`, `ollama/qwen2.5-coder`, `ollama/llama3.3` | `ollama/mistral-small` | `ollama/llava`, `ollama/qwen2-vl` |
+| **HuggingFace** | `huggingface/latest` | Custom HF endpoints | `huggingface/vision` |
+| **Ollama / vLLM / Jan** | `ollama/latest`, `ollama/qwen2.5-coder`, `ollama/llama3.3`, `vllm/latest` | `ollama/mistral-small` | `ollama/llava`, `ollama/qwen2-vl` |
 
 ---
 

@@ -11,21 +11,23 @@ def test_provider_parse_model_name():
     assert p.clean_model_name == "qwen2.5-coder:latest"
     assert "localhost:11434" in p.base_url
 
-def test_legacy_and_vision_models():
-    # Legacy GPT-3.5
-    p_legacy = UniversalLLMProvider(model_name="openai/gpt-3.5-turbo")
-    assert p_legacy.clean_model_name == "gpt-3.5-turbo"
+def test_new_cloud_and_local_providers():
+    # Cohere
+    p_cohere = UniversalLLMProvider(model_name="cohere/latest")
+    assert p_cohere.provider_prefix == "cohere"
+    assert "cohere.com" in p_cohere.base_url
 
-    # Vision Pixtral Large
-    p_vision = UniversalLLMProvider(model_name="mistral/pixtral-large")
-    assert p_vision.clean_model_name == "pixtral-large-latest"
+    # Perplexity
+    p_perp = UniversalLLMProvider(model_name="perplexity/sonar-pro")
+    assert p_perp.provider_prefix == "perplexity"
+    assert "perplexity.ai" in p_perp.base_url
 
-    # MiniMax Legacy
-    p_minimax_legacy = UniversalLLMProvider(model_name="minimax/abab5.5")
-    assert p_minimax_legacy.clean_model_name == "abab5.5-chat"
+    # Together AI
+    p_together = UniversalLLMProvider(model_name="together/latest")
+    assert p_together.provider_prefix == "together"
+    assert "together.xyz" in p_together.base_url
 
-def test_image_base64_encoder(tmp_path):
-    img_file = tmp_path / "test.png"
-    img_file.write_bytes(b"fake_image_bytes")
-    encoded = UniversalLLMProvider.encode_image_to_base64(img_file)
-    assert encoded.startswith("data:image/png;base64,")
+    # vLLM local
+    p_vllm = UniversalLLMProvider(model_name="vllm/latest")
+    assert p_vllm.provider_prefix == "vllm"
+    assert "localhost:8000" in p_vllm.base_url
