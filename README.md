@@ -11,7 +11,7 @@
 
 **TermiAgent** is an autonomous open-source AI coding agent that runs directly in your terminal. Inspect codebases, edit files, search code, process images, generate assets, and run shell commands — powered by **ANY** AI provider or local LLM (*Gemini, Claude, GPT, DeepSeek, Mistral, MiniMax, Cohere, Perplexity, Together AI, Fireworks, Groq, HuggingFace, Ollama, vLLM, LM Studio, Jan*).
 
-[Features](#-key-features) • [1-Command Install](#-fast-1-command-installation-with-uv) • [Supported Models](#-supported-ai-model-providers) • [Python SDK](#-python-sdk-integration) • [License](#-license)
+[Features](#-key-features) • [1-Command Install](#-fast-1-command-installation-with-uv) • [Supported Models](#-supported-ai-model-catalog-modern-vision-legacy--local) • [Full Provider Setup Guide](PROVIDERS.md) • [Python SDK](#-python-sdk-integration) • [License](#-license)
 
 </div>
 
