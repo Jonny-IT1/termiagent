@@ -29,6 +29,18 @@ PROVIDER_ENV_KEYS = {
     "anthropic": "ANTHROPIC_API_KEY"
 }
 
+LATEST_MODEL_ALIASES = {
+    "gemini/latest": "gemini-2.0-flash",
+    "openai/latest": "gpt-4o",
+    "anthropic/latest": "claude-3-5-sonnet-20241022",
+    "claude/latest": "claude-3-5-sonnet-20241022",
+    "deepseek/latest": "deepseek-chat",
+    "mistral/latest": "codestral-latest",
+    "minimax/latest": "minimax-text-01",
+    "groq/latest": "llama-3.3-70b-versatile",
+    "ollama/latest": "qwen2.5-coder:latest"
+}
+
 
 class UniversalLLMProvider(BaseLLMProvider):
     def __init__(
@@ -37,8 +49,8 @@ class UniversalLLMProvider(BaseLLMProvider):
         api_key: Optional[str] = None,
         base_url: Optional[str] = None
     ):
-        self.model_name = model_name
-        self.provider_prefix, self.clean_model_name = self._parse_model_name(model_name)
+        self.model_name = LATEST_MODEL_ALIASES.get(model_name.lower(), model_name)
+        self.provider_prefix, self.clean_model_name = self._parse_model_name(self.model_name)
         self.api_key = api_key or self._resolve_api_key(self.provider_prefix)
         self.base_url = base_url or PROVIDER_ENDPOINT_MAP.get(self.provider_prefix, PROVIDER_ENDPOINT_MAP["openai"])
 

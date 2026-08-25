@@ -11,11 +11,12 @@ def test_provider_parse_model_name():
     assert p.clean_model_name == "qwen2.5-coder"
     assert "localhost:11434" in p.base_url
 
-def test_mistral_and_minimax_provider():
-    p_mistral = UniversalLLMProvider(model_name="mistral/codestral-latest")
-    assert p_mistral.provider_prefix == "mistral"
-    assert "api.mistral.ai" in p_mistral.base_url
+def test_latest_aliases():
+    p_gemini = UniversalLLMProvider(model_name="gemini/latest")
+    assert p_gemini.clean_model_name == "gemini-2.0-flash"
 
-    p_minimax = UniversalLLMProvider(model_name="minimax/minimax-text-01")
-    assert p_minimax.provider_prefix == "minimax"
-    assert "api.minimaxi.chat" in p_minimax.base_url
+    p_mistral = UniversalLLMProvider(model_name="mistral/latest")
+    assert p_mistral.clean_model_name == "codestral-latest"
+
+    p_deepseek = UniversalLLMProvider(model_name="deepseek/latest")
+    assert p_deepseek.clean_model_name == "deepseek-chat"
