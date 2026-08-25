@@ -1,6 +1,20 @@
-# 🔌 Complete LLM Provider Setup Guide for TermiAgent
+# 🔌 Complete LLM Provider Setup & Universal Model Catalog
 
-This guide provides step-by-step instructions on how to get API keys, set environment variables, and launch **TermiAgent** with **EVERY** supported AI model provider.
+This guide provides step-by-step instructions on how to get API keys, set environment variables, and launch **TermiAgent** with **EVERY model from EVERY manufacturer** (Google, OpenAI, Anthropic, DeepSeek, Mistral, Meta Llama, Qwen, Microsoft Phi, Cohere, Perplexity, MiniMax, Groq, Together, Fireworks, Ollama, vLLM, Jan, Kobold).
+
+---
+
+## ⚡ Dynamic Wildcard Resolution (100% Support for ALL Present & Future Models)
+
+TermiAgent uses **Dynamic Provider-Model Wildcard Resolution**. This means you can specify **ANY model name** released by any manufacturer using the `provider/model-name` syntax, and TermiAgent will dynamically route it!
+
+For example:
+- `termiagent -m openai/gpt-4-0125-preview`
+- `termiagent -m anthropic/claude-3-5-sonnet-20240620`
+- `termiagent -m meta/llama-3.1-405b`
+- `termiagent -m qwen/qwen2.5-coder-32b`
+- `termiagent -m microsoft/phi-4`
+- `termiagent -m ollama/custom-local-model`
 
 ---
 

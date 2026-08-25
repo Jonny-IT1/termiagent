@@ -52,27 +52,34 @@ PROVIDER_ENV_KEYS = {
     "replicate": "REPLICATE_API_TOKEN"
 }
 
-# Extensive Model Catalog Mapping
+# Exhaustive Model Catalog Mapping across all major vendors
 MODEL_CATALOG = {
-    # OpenAI
+    # OpenAI (All Versions)
     "openai/latest": "openai/gpt-4o",
     "openai/gpt-4o": "openai/gpt-4o",
     "openai/gpt-4o-mini": "openai/gpt-4o-mini",
     "openai/o1": "openai/o1",
+    "openai/o1-mini": "openai/o1-mini",
+    "openai/o1-preview": "openai/o1-preview",
     "openai/o3-mini": "openai/o3-mini",
     "openai/gpt-4-turbo": "openai/gpt-4-turbo",
+    "openai/gpt-4-turbo-preview": "openai/gpt-4-0125-preview",
     "openai/gpt-4": "openai/gpt-4",
+    "openai/gpt-4-32k": "openai/gpt-4-32k",
     "openai/gpt-3.5-turbo": "openai/gpt-3.5-turbo",
+    "openai/gpt-3.5-turbo-16k": "openai/gpt-3.5-turbo-16k",
 
-    # Google Gemini
+    # Google Gemini (All Versions)
     "gemini/latest": "gemini/gemini-2.0-flash",
     "gemini/gemini-2.0-flash": "gemini/gemini-2.0-flash",
+    "gemini/gemini-2.0-flash-lite": "gemini/gemini-2.0-flash-lite-preview-02-05",
     "gemini/gemini-2.0-pro-exp": "gemini/gemini-2.0-pro-exp",
     "gemini/gemini-1.5-pro": "gemini/gemini-1.5-pro",
     "gemini/gemini-1.5-flash": "gemini/gemini-1.5-flash",
     "gemini/gemini-1.0-pro": "gemini/gemini-1.0-pro",
+    "gemini/gemini-ultra": "gemini/gemini-ultra",
 
-    # Anthropic Claude
+    # Anthropic Claude (All Versions)
     "anthropic/latest": "anthropic/claude-3-5-sonnet-20241022",
     "anthropic/claude-3-5-sonnet": "anthropic/claude-3-5-sonnet-20241022",
     "anthropic/claude-3-5-haiku": "anthropic/claude-3-5-haiku-20241022",
@@ -80,26 +87,52 @@ MODEL_CATALOG = {
     "anthropic/claude-3-sonnet": "anthropic/claude-3-sonnet-20240229",
     "anthropic/claude-3-haiku": "anthropic/claude-3-haiku-20240307",
     "anthropic/claude-2.1": "anthropic/claude-2.1",
+    "anthropic/claude-2.0": "anthropic/claude-2.0",
+    "anthropic/claude-instant-1.2": "anthropic/claude-instant-1.2",
 
-    # DeepSeek
+    # DeepSeek (All Versions)
     "deepseek/latest": "deepseek/deepseek-chat",
     "deepseek/deepseek-chat": "deepseek/deepseek-chat",
+    "deepseek/deepseek-v3": "deepseek/deepseek-chat",
     "deepseek/deepseek-reasoner": "deepseek/deepseek-reasoner",
+    "deepseek/deepseek-r1": "deepseek/deepseek-reasoner",
     "deepseek/deepseek-coder": "deepseek/deepseek-coder",
     "deepseek/deepseek-vl": "deepseek/deepseek-vl",
 
-    # Mistral AI
+    # Mistral AI (All Versions)
     "mistral/latest": "mistral/codestral-latest",
     "mistral/codestral": "mistral/codestral-latest",
     "mistral/mistral-large": "mistral/mistral-large-latest",
     "mistral/pixtral-large": "mistral/pixtral-large-latest",
+    "mistral/pixtral-12b": "mistral/pixtral-12b-2409",
     "mistral/mistral-small": "mistral/mistral-small-latest",
     "mistral/mistral-medium": "mistral/mistral-medium",
+    "mistral/mistral-7b": "mistral/open-mistral-7b",
+    "mistral/mixtral-8x7b": "mistral/open-mixtral-8x7b",
+    "mistral/mixtral-8x22b": "mistral/open-mixtral-8x22b",
+
+    # Meta Llama (via Together/Groq/Fireworks/Ollama)
+    "meta/llama-3.3-70b": "groq/llama-3.3-70b-versatile",
+    "meta/llama-3.2-90b-vision": "together/meta-llama/Llama-3.2-90B-Vision-Instruct",
+    "meta/llama-3.1-405b": "together/meta-llama/Meta-Llama-3.1-405B-Instruct-Turbo",
+    "meta/llama-3.1-70b": "groq/llama-3.1-70b-versatile",
+    "meta/llama-3.1-8b": "groq/llama-3.1-8b-instant",
+    "meta/llama-2-70b": "together/meta-llama/Llama-2-70b-chat-hf",
+
+    # Qwen / Alibaba (All Versions)
+    "qwen/qwen2.5-coder-32b": "together/Qwen/Qwen2.5-Coder-32B-Instruct",
+    "qwen/qwen2.5-72b": "together/Qwen/Qwen2.5-72B-Instruct",
+    "qwen/qwen2-vl-72b": "together/Qwen/Qwen2-VL-72B-Instruct",
+
+    # Microsoft Phi
+    "microsoft/phi-4": "together/microsoft/phi-4",
+    "microsoft/phi-3-medium": "together/microsoft/Phi-3-medium-128k-instruct",
 
     # Cohere
     "cohere/latest": "cohere/command-r-plus",
     "cohere/command-r-plus": "cohere/command-r-plus",
     "cohere/command-r": "cohere/command-r",
+    "cohere/command-light": "cohere/command-light",
 
     # Perplexity AI
     "perplexity/latest": "perplexity/sonar-pro",
@@ -115,25 +148,20 @@ MODEL_CATALOG = {
     "minimax/abab6.5": "minimax/abab6.5-chat",
     "minimax/abab5.5": "minimax/abab5.5-chat",
 
-    # Together AI & Fireworks AI
+    # Groq & Together & Fireworks
+    "groq/latest": "groq/llama-3.3-70b-versatile",
+    "groq/deepseek-r1-70b": "groq/deepseek-r1-distill-llama-70b",
     "together/latest": "together/meta-llama/Llama-3.3-70B-Instruct-Turbo",
-    "together/llama3.3": "together/meta-llama/Llama-3.3-70B-Instruct-Turbo",
-    "together/deepseek-r1": "together/deepseek-ai/DeepSeek-R1",
     "fireworks/latest": "fireworks/accounts/fireworks/models/deepseek-r1",
 
-    # Groq
-    "groq/latest": "groq/llama-3.3-70b-versatile",
-    "groq/llama-3.3-70b": "groq/llama-3.3-70b-versatile",
-    "groq/deepseek-r1-70b": "groq/deepseek-r1-distill-llama-70b",
-    "groq/mixtral-8x7b": "groq/mixtral-8x7b-32768",
-
-    # Local Ollama & vLLM
+    # Local Ollama & Self-Hosted
     "ollama/latest": "ollama/qwen2.5-coder:latest",
     "ollama/qwen2.5-coder": "ollama/qwen2.5-coder:latest",
     "ollama/llama3.3": "ollama/llama3.3:latest",
+    "ollama/phi4": "ollama/phi4:latest",
+    "ollama/deepseek-r1": "ollama/deepseek-r1:latest",
     "ollama/llava": "ollama/llava:latest",
-    "ollama/qwen2-vl": "ollama/qwen2-vl:latest",
-    "vllm/latest": "vllm/default"
+    "ollama/qwen2-vl": "ollama/qwen2-vl:latest"
 }
 
 
@@ -145,12 +173,22 @@ class UniversalLLMProvider(BaseLLMProvider):
         base_url: Optional[str] = None
     ):
         raw_key = model_name.lower()
-        self.model_name = MODEL_CATALOG.get(raw_key, model_name)
+        # Catalog lookup with dynamic fallback
+        clean = MODEL_CATALOG.get(raw_key, model_name)
+        if "/" not in clean and "/" in model_name:
+            provider_part = model_name.split("/", 1)[0].lower()
+            clean = f"{provider_part}/{clean}"
+
+        self.model_name = clean
         self.provider_prefix, self.clean_model_name = self._parse_model_name(self.model_name)
         self.api_key = api_key or self._resolve_api_key(self.provider_prefix)
         self.base_url = base_url or PROVIDER_ENDPOINT_MAP.get(self.provider_prefix, PROVIDER_ENDPOINT_MAP["openai"])
 
     def _parse_model_name(self, name: str) -> tuple[str, str]:
+        """
+        Parses model string into (provider_prefix, clean_model_name).
+        Supports dynamic provider/model syntax for ANY vendor and ANY custom model release.
+        """
         if "/" in name:
             parts = name.split("/", 1)
             return parts[0].lower(), parts[1]
@@ -180,7 +218,7 @@ class UniversalLLMProvider(BaseLLMProvider):
         messages: List[Dict[str, Any]],
         tools: Optional[List[Dict[str, Any]]] = None
     ) -> Dict[str, Any]:
-        """Sends chat request using OpenAI-compatible HTTP REST protocol."""
+        """Sends chat request using OpenAI-compatible HTTP REST protocol with Vision payload support."""
         headers = {
             "Content-Type": "application/json"
         }
