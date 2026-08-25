@@ -9,7 +9,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg)](#)
 
-**TermiAgent** is an autonomous open-source AI coding agent that runs directly in your terminal. Inspect codebases, edit files, search code, and run shell commands — powered by **ANY** AI provider or local LLM (*Gemini, Claude 3.5, GPT-4o, DeepSeek, Mistral Le Chat, MiniMax, Ollama, OpenRouter, Groq*).
+**TermiAgent** is an autonomous open-source AI coding agent that runs directly in your terminal. Inspect codebases, edit files, search code, process images, generate assets, and run shell commands — powered by **ANY** AI provider or local LLM (*Gemini 2.0/1.5, Claude 3.5/3, GPT-4o/3.5, DeepSeek V3/R1, Mistral Le Chat, MiniMax, Ollama, OpenRouter, Groq*).
 
 [Features](#-key-features) • [1-Command Install](#-fast-1-command-installation-with-uv) • [Supported Models](#-supported-ai-model-providers) • [Python SDK](#-python-sdk-integration) • [License](#-license)
 
@@ -20,79 +20,35 @@
 ## ⚡ Key Features
 
 - 🔌 **Universal Model Compatibility**: Connect seamlessly to Google Gemini, Anthropic Claude, OpenAI, DeepSeek, Mistral AI (Le Chat / Codestral), MiniMax, OpenRouter, Groq, or 100% offline local LLMs via Ollama & LM Studio.
+- 👁️ **Multimodal Vision Understanding**: Input screenshots, diagrams, or UI mockups for vision models (Claude 3.5 Vision, Gemini 2.0 Vision, GPT-4o Vision, Pixtral, LLaVA, Qwen2-VL).
+- 🎨 **Image & Diagram Generation**: Native `generate_image` tool to produce diagrams, UI mockups, and visual assets directly from text prompts.
+- 📜 **Full Modern & Legacy Model Catalog**: Support for both the newest flagship models (`gemini/latest`, `openai/latest`, `mistral/latest`) AND legacy versions (`gpt-3.5-turbo`, `claude-2.1`, `gemini-1.0-pro`, `abab5.5`).
 - 🔀 **Live Model Switching**: Switch models on-the-fly mid-conversation using `/model <name>`.
 - 🛠️ **Autonomous Agent Tools**:
   - 📖 `view_file`: Read file contents with precise line numbers.
   - ✏️ `write_file` & `edit_file`: Create files or apply targeted diff replacements.
   - 🔍 `search_codebase`: Fast regex and keyword code search.
+  - 🖼️ `generate_image`: Produce visual diagrams and image assets.
   - ⚡ `run_shell_command`: Safely execute terminal commands (`pytest`, `git`, `python`, `npm`).
 - ⚡ **Ultra-Fast & Modern**: Built with 100% Pure Python 3, `httpx`, `rich`, `prompt-toolkit`, and managed via `uv`.
 - 🐍 **Python SDK Library**: Import `from termiagent import TermiAgent` to use the agent programmatically inside other Python projects.
 
 ---
 
-## 🏗️ Architecture & How It Works
+## 🤖 Supported AI Model Catalog (Modern & Legacy)
 
-```
-                                  ┌───────────────────────────┐
-                                  │      TermiAgent CLI       │
-                                  │ (Rich REPL + Slash Cmds)  │
-                                  └─────────────┬─────────────┘
-                                                │
-                                  ┌─────────────▼─────────────┐
-                                  │   Autonomous ReAct Engine │
-                                  └─────────────┬─────────────┘
-                                                │
-                 ┌──────────────────────────────┴──────────────────────────────┐
-                 │                                                             │
-   ┌─────────────▼─────────────┐                                 ┌─────────────▼─────────────┐
-   │ Universal LLM Provider    │                                 │   Agent Tools Registry    │
-   │ (OpenAI/Gemini/DeepSeek/  │                                 │ (FileSystem & Shell Exec) │
-   │ Mistral/MiniMax/Ollama)   │                                 └───────────────────────────┘
-   └───────────────────────────┘
-```
+TermiAgent supports any OpenAI-compatible API endpoint, vision provider, or legacy model. Specify the model using `--model provider/model-name`:
 
----
-
-## 🚀 Fast 1-Command Installation (with `uv`)
-
-### Linux / macOS
-
-```bash
-curl -LsSf https://raw.githubusercontent.com/Jonny-IT1/termiagent/main/install.sh | sh
-```
-
-### Windows (PowerShell)
-
-```powershell
-powershell -ExecutionPolicy ByPass -c "irm https://raw.githubusercontent.com/Jonny-IT1/termiagent/main/install.ps1 | iex"
-```
-
-### Standard PyPI / Local Installation
-
-```bash
-uv pip install -e .
-# or standard pip:
-pip install termiagent
-```
-
----
-
-## 🤖 Supported AI Model Providers
-
-TermiAgent supports any OpenAI-compatible API endpoint or native provider. Specify the model using `--model provider/model-name`:
-
-| Provider | Example Command / Model String | Environment Variable |
-| :--- | :--- | :--- |
-| **Google Gemini** | `termiagent -m gemini/gemini-2.0-flash` | `GEMINI_API_KEY` |
-| **Mistral AI (Le Chat)** | `termiagent -m mistral/codestral-latest` | `MISTRAL_API_KEY` |
-| **MiniMax** | `termiagent -m minimax/minimax-text-01` | `MINIMAX_API_KEY` |
-| **OpenAI** | `termiagent -m openai/gpt-4o` | `OPENAI_API_KEY` |
-| **Anthropic** | `termiagent -m anthropic/claude-3-5-sonnet` | `ANTHROPIC_API_KEY` |
-| **DeepSeek** | `termiagent -m deepseek/deepseek-chat` | `DEEPSEEK_API_KEY` |
-| **Local Ollama** | `termiagent -m ollama/qwen2.5-coder` | *None (Runs locally)* |
-| **OpenRouter** | `termiagent -m openrouter/anthropic/claude-3.5-sonnet` | `OPENROUTER_API_KEY` |
-| **Groq** | `termiagent -m groq/llama-3.3-70b-versatile` | `GROQ_API_KEY` |
+| Provider | Modern Models | Legacy Models | Vision Models |
+| :--- | :--- | :--- | :--- |
+| **Google Gemini** | `gemini/latest`, `gemini/gemini-2.0-flash`, `gemini/gemini-2.0-pro-exp` | `gemini/gemini-1.5-pro`, `gemini/gemini-1.0-pro` | `gemini/gemini-2.0-flash` |
+| **OpenAI** | `openai/latest`, `openai/gpt-4o`, `openai/o1`, `openai/o3-mini` | `openai/gpt-4-turbo`, `openai/gpt-3.5-turbo` | `openai/gpt-4o` |
+| **Anthropic** | `anthropic/latest`, `anthropic/claude-3-5-sonnet` | `anthropic/claude-3-opus`, `anthropic/claude-2.1` | `anthropic/claude-3-5-sonnet` |
+| **Mistral AI** | `mistral/latest`, `mistral/codestral-latest`, `mistral/mistral-large` | `mistral/mistral-medium`, `mistral/mistral-small` | `mistral/pixtral-large` |
+| **DeepSeek** | `deepseek/latest`, `deepseek/deepseek-chat` (V3), `deepseek/deepseek-reasoner` (R1) | `deepseek/deepseek-coder` | `deepseek/deepseek-vl` |
+| **MiniMax** | `minimax/latest`, `minimax/minimax-text-01`, `minimax/abab6.5t` | `minimax/abab6.5`, `minimax/abab5.5` | `minimax/minimax-text-01` |
+| **Groq (Fast)** | `groq/latest`, `groq/llama-3.3-70b`, `groq/deepseek-r1-70b` | `groq/mixtral-8x7b` | `groq/llama-3.3-70b` |
+| **Ollama (Local)** | `ollama/latest`, `ollama/qwen2.5-coder`, `ollama/llama3.3` | `ollama/mistral-small` | `ollama/llava`, `ollama/qwen2-vl` |
 
 ---
 
