@@ -10,6 +10,8 @@ PROVIDER_ENDPOINT_MAP = {
     "anthropic": "https://api.anthropic.com/v1/messages",
     "gemini": "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions",
     "deepseek": "https://api.deepseek.com/chat/completions",
+    "mistral": "https://api.mistral.ai/v1/chat/completions",
+    "minimax": "https://api.minimaxi.chat/v1/chat/completions",
     "openrouter": "https://openrouter.ai/api/v1/chat/completions",
     "groq": "https://api.groq.com/openai/v1/chat/completions",
     "ollama": "http://localhost:11434/v1/chat/completions",
@@ -20,6 +22,8 @@ PROVIDER_ENV_KEYS = {
     "openai": "OPENAI_API_KEY",
     "gemini": "GEMINI_API_KEY",
     "deepseek": "DEEPSEEK_API_KEY",
+    "mistral": "MISTRAL_API_KEY",
+    "minimax": "MINIMAX_API_KEY",
     "openrouter": "OPENROUTER_API_KEY",
     "groq": "GROQ_API_KEY",
     "anthropic": "ANTHROPIC_API_KEY"
@@ -75,7 +79,7 @@ class UniversalLLMProvider(BaseLLMProvider):
                 response = client.post(self.base_url, headers=headers, json=payload)
                 if response.status_code != 200:
                     return {
-                        "content": f"API Error (HTTP {response.status_code}): {response.text}",
+                        "content": f"API Error ({self.provider_prefix} HTTP {response.status_code}): {response.text}",
                         "tool_calls": None,
                         "model": self.model_name
                     }

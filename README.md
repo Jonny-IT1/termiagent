@@ -9,7 +9,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg)](#)
 
-**TermiAgent** is an autonomous open-source AI coding agent that runs directly in your terminal. Inspect codebases, edit files, search code, and run shell commands — powered by **ANY** AI provider or local LLM (*Gemini, Claude 3.5, GPT-4o, DeepSeek, Ollama, OpenRouter, Groq*).
+**TermiAgent** is an autonomous open-source AI coding agent that runs directly in your terminal. Inspect codebases, edit files, search code, and run shell commands — powered by **ANY** AI provider or local LLM (*Gemini, Claude 3.5, GPT-4o, DeepSeek, Mistral Le Chat, MiniMax, Ollama, OpenRouter, Groq*).
 
 [Features](#-key-features) • [1-Command Install](#-fast-1-command-installation-with-uv) • [Supported Models](#-supported-ai-model-providers) • [Python SDK](#-python-sdk-integration) • [License](#-license)
 
@@ -19,7 +19,7 @@
 
 ## ⚡ Key Features
 
-- 🔌 **Universal Model Compatibility**: Connect seamlessly to Google Gemini, Anthropic Claude, OpenAI, DeepSeek, OpenRouter, Groq, or 100% offline local LLMs via Ollama & LM Studio.
+- 🔌 **Universal Model Compatibility**: Connect seamlessly to Google Gemini, Anthropic Claude, OpenAI, DeepSeek, Mistral AI (Le Chat / Codestral), MiniMax, OpenRouter, Groq, or 100% offline local LLMs via Ollama & LM Studio.
 - 🔀 **Live Model Switching**: Switch models on-the-fly mid-conversation using `/model <name>`.
 - 🛠️ **Autonomous Agent Tools**:
   - 📖 `view_file`: Read file contents with precise line numbers.
@@ -48,7 +48,7 @@
    ┌─────────────▼─────────────┐                                 ┌─────────────▼─────────────┐
    │ Universal LLM Provider    │                                 │   Agent Tools Registry    │
    │ (OpenAI/Gemini/DeepSeek/  │                                 │ (FileSystem & Shell Exec) │
-   │  Ollama / OpenRouter)     │                                 └───────────────────────────┘
+   │ Mistral/MiniMax/Ollama)   │                                 └───────────────────────────┘
    └───────────────────────────┘
 ```
 
@@ -85,6 +85,8 @@ TermiAgent supports any OpenAI-compatible API endpoint or native provider. Speci
 | Provider | Example Command / Model String | Environment Variable |
 | :--- | :--- | :--- |
 | **Google Gemini** | `termiagent -m gemini/gemini-2.0-flash` | `GEMINI_API_KEY` |
+| **Mistral AI (Le Chat)** | `termiagent -m mistral/codestral-latest` | `MISTRAL_API_KEY` |
+| **MiniMax** | `termiagent -m minimax/minimax-text-01` | `MINIMAX_API_KEY` |
 | **OpenAI** | `termiagent -m openai/gpt-4o` | `OPENAI_API_KEY` |
 | **Anthropic** | `termiagent -m anthropic/claude-3-5-sonnet` | `ANTHROPIC_API_KEY` |
 | **DeepSeek** | `termiagent -m deepseek/deepseek-chat` | `DEEPSEEK_API_KEY` |
